@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
@@ -31,6 +32,21 @@ func helloHandler(w http.ResponseWriter, r *http.Request) {
 
 
     fmt.Fprintf(w, "Hello!")
+		type User struct {
+			Id    int     `json:"id"`
+			Name  string  `json:"name"`
+			Email string  `json:"email"`
+			Phone string  `json:"phone"`
+ }
+
+		w.Header().Set("Content-Type", "application/json")
+      user := User {
+                    Id: 1,
+                    Name: "John Doe",
+                    Email: "johndoe@gmail.com",
+                    Phone: "000099999",
+               }
+     json.NewEncoder(w).Encode(user)
 }
 
 
